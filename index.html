@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Elements</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f7f9fc; /* Light gray background */
+        margin: 0;
+        padding: 20px;
+      }
+      form {
+        background: #ffffff; /* White form background */
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+      }
+      .input {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 2px solid #a5c8e1; /* Soft blue border */
+        border-radius: 5px;
+        transition: border-color 0.3s;
+      }
+      .input:focus {
+        border-color: #5b9bd5; /* Darker blue on focus */
+        outline: none;
+      }
+      .results {
+        margin-top: 20px;
+      }
+      .box {
+        border: 1px solid #7da0b1; /* Soft teal border */
+        padding: 10px;
+        margin-bottom: 10px;
+        background-color: #e0f4f1; /* Light teal background */
+        border-radius: 5px;
+        color: #4a7c8c; /* Soft text color */
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <form>
+      <input
+        type="number"
+        name="elements"
+        class="input"
+        placeholder="Number Of Elements"
+        required
+      />
+      <input
+        type="text"
+        name="texts"
+        class="input"
+        placeholder="Elements Text"
+        required
+      />
+      <select name="type" class="input" required>
+        <option value="div">Div</option>
+        <option value="section">Section</option>
+      </select>
+      <input type="submit" name="create" class="input" value="Create" />
+      <div class="results"></div>
+    </form>
+
+    <script>
+      document
+        .querySelector("form")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          var elementsInput = document.querySelector('input[name="elements"]');
+          var textsInput = document.querySelector('input[name="texts"]');
+          var typeSelect = document.querySelector('select[name="type"]');
+          var resultsDiv = document.querySelector(".results");
+
+          var numElements = parseInt(elementsInput.value);
+          var elementText = textsInput.value;
+          var elementType = typeSelect.value;
+
+          resultsDiv.innerHTML = "";
+
+          for (var i = 1; i <= numElements; i++) {
+            var newElement = document.createElement(elementType);
+            newElement.classList.add("box");
+            newElement.title = "Element";
+            newElement.id = "id-" + i;
+            newElement.textContent = elementText;
+            resultsDiv.appendChild(newElement);
+          }
+        });
+    </script>
+  </body>
+</html>
